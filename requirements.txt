@@ -1,0 +1,9 @@
+crewai
+crewai-tools
+together
+langchain
+langchain-community
+chromadb
+python-dotenv
+streamlit
+tiktoken
