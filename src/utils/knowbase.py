@@ -39,6 +39,7 @@ class KnowBase:
             try:
                 collection = self.client.create_collection(self.collection_name)
                 print(f"📊 Coleção '{self.collection_name}' criada.")
+                self.collection = collection  # Corrige o erro de atributo
                 self.populate_from_data()
                 return collection
             except Exception as ce:

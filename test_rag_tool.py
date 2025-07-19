@@ -44,12 +44,14 @@ def test_rag_agent():
 
     test_queries = [
         "Quais são os horários de funcionamento da clínica?",
-        # "Onde fica localizada a clínica?",
-        # "Quais especialidades são oferecidas?",
-        # "Qual o perfil profissional do Dr. Garcia?",
-        # "Qual é o CRM do Dr. Garcia?",
-        # "Qual é a formação acadêmica do Dr. Garcia?",
-        # "Quais são os serviços oferecidos pela clínica?"
+        "Onde fica localizada a clínica?",
+        "Quais especialidades são oferecidas?",
+        "Qual o perfil profissional do Dr. Garcia?",
+        "Qual é o CRM do Dr. Garcia?",
+        "Qual é a formação acadêmica do Dr. Garcia?",
+        "Quais são os serviços oferecidos pela clínica?",
+        "Meu dente de trás doi",
+        "O senhor atende pelo SUS"
     ]
 
     for query in test_queries:
