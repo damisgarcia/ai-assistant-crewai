@@ -5,7 +5,7 @@ from crewai.tools import BaseTool
 from pydantic import BaseModel, Field
 from typing import Type
 from dotenv import load_dotenv
-from src.utils.knowbase import KnowBase
+from ..utils.knowbase import KnowBase
 
 load_dotenv()
 

@@ -13,7 +13,7 @@ from crewai import Agent, Task, Crew, LLM
 
 # print(f"📊 Coleção RAG carregada para o teste {collection}")
 
-from src.tools.rag import RagTool
+from ..tools.know_base import RagTool
 
 load_dotenv()
 

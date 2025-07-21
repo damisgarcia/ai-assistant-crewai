@@ -2,9 +2,9 @@ import os
 from dotenv import load_dotenv
 from crewai import Task, LLM
 
-from src.tools.rag import RagTool
-from src.agents import FailAgent, GreetingAgent, InfoAgent, IntentAgent
-from src.tasks import GreetingTask, UnknownTask, GeneralInfoTask
+from ..tools.know_base import RagTool
+from ..agents import FailAgent, GreetingAgent, InfoAgent, IntentAgent
+from ..tasks import GreetingTask, UnknownTask, GeneralInfoTask
 
 load_dotenv()
 
