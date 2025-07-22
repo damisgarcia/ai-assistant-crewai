@@ -1,0 +1,18 @@
+#!/bin/bash
+# Script para executar comandos Django com ambiente virtual ativo
+# Uso: bin/manage <comando>
+
+# Verificar se o venv existe
+if [ ! -d ".venv" ]; then
+    echo "Erro: Ambiente virtual não encontrado."
+    exit 1
+fi
+
+# Ativar ambiente virtual
+source .venv/bin/activate
+
+# Definir PYTHONPATH
+export PYTHONPATH="${PYTHONPATH}:$(pwd)"
+
+# Executar comando Django
+cd src && python manage.py "$@"
