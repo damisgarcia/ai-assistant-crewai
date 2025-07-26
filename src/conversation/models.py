@@ -29,7 +29,7 @@ class Message(models.Model):
     ]
     conversation = models.ForeignKey(Conversation, on_delete=models.CASCADE, related_name="messages")
     sender_type = models.CharField(max_length=20, choices=SENDER_TYPE_CHOICES)
-    sender_id = models.IntegerField(null=True, blank=True)
+    sender = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     content = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
