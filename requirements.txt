@@ -6,3 +6,4 @@ python-dotenv
 streamlit
 tiktoken
 dotenv
+django-cors-headers==4.7.0
