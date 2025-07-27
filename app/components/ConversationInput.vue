@@ -30,7 +30,7 @@ function handleAsk() {
 </script>
 
 <template>
-  <div class="w-full relative">
+  <div class="w-full relative max-w-5xl mx-auto">
     <form @submit.prevent="handleAsk">
       <UTextarea
         ref="conversation-input"
@@ -40,6 +40,7 @@ function handleAsk() {
         placeholder="Pergunte alguma coisa"
         class="w-full"
         :autoresize="true"
+        :autofocus="true"
         :rows="5"
         @keyup.prevent.enter="handleAsk"
       />

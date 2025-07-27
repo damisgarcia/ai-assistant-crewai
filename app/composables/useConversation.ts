@@ -1,7 +1,11 @@
 export default () => {
+  function fetchOne(id: string) {
+    const options = useFetchApiOptions();
+    return $fetch<any>(`conversation/${id}`, options);
+  }
+
   function fetchAll() {
     const options = useFetchApiOptions();
-
     return $fetch<any[]>("conversation", options);
   }
 
@@ -15,6 +19,7 @@ export default () => {
   }
 
   return {
+    fetchOne,
     fetchAll,
     create,
   };
