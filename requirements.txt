@@ -7,3 +7,4 @@ streamlit
 tiktoken
 dotenv
 django-cors-headers==4.7.0
+djangorestframework
