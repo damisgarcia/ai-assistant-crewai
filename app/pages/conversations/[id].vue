@@ -2,6 +2,7 @@
 const route = useRoute();
 const Conversation = useConversation();
 const Message = useConversationMessage();
+const Trend = useTrend();
 
 const message = ref("");
 
@@ -23,8 +24,26 @@ const {
   { lazy: true, server: false }
 );
 
+onMounted(() => {
+  Trend.connect(route.params.id as string);
+
+  Trend.onConnected(() => {
+    console.log("WebSocket connected for conversation:", route.params.id);
+  });
+
+  Trend.onMessage((data) => {
+    console.log("Received message:", data);
+  });
+});
+
+onUnmounted(() => {
+  Trend.disconnect();
+});
+
 async function onMessage() {
   const id = route.params.id as string;
+
+  Trend.sendMessage(message.value);
 
   await Message.create(id, {
     content: message.value,
@@ -37,7 +56,7 @@ async function onMessage() {
 <template>
   <layout-content class="relative col-span-4">
     <loader-message :visible="pending" />
-    <conversation-message-container :ready="!pending">
+    <conversation-message-container>
       <lazy-conversation-message
         v-for="m in messages"
         :key="m.id"

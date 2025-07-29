@@ -37,9 +37,12 @@ ALLOWED_HOSTS = [
 
 CORS_ALLOW_ALL_ORIGINS = True
 
+ASGI_APPLICATION = "django_app.asgi.application"
+
 # Application definition
 
 INSTALLED_APPS = [
+    'daphne',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -50,6 +53,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'member',
     'conversation',
+    'trend'
 ]
 
 MIDDLEWARE = [

@@ -22,11 +22,12 @@ const { data: conversations } = await useAsyncData(
         </template>
       </suspense>
     </layout-aside>
-    <suspense>
-      <NuxtPage />
-      <template #fallback>
-        <loader-message />
-      </template>
-    </suspense>
+    <client-only>
+      <suspense>
+        <ws-conversation-provider>
+          <NuxtPage />
+        </ws-conversation-provider>
+      </suspense>
+    </client-only>
   </div>
 </template>
