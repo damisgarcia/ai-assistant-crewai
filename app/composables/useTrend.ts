@@ -1,5 +1,4 @@
 import { useWebSocket, createEventHook } from "@vueuse/core";
-[];
 
 const provideKey = "trend";
 

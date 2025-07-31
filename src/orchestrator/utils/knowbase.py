@@ -1,7 +1,7 @@
 import os
 import glob
 import chromadb
-from src.utils.embedding import Embedding
+from .embedding import Embedding
 
 import threading
 
@@ -21,7 +21,7 @@ class KnowBase:
         if getattr(self, '_initialized', False):
             return
         if persist_dir is None:
-            persist_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'chroma_db')
+            persist_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'chroma_db')
         self.persist_dir = persist_dir
         self.collection_name = collection_name
         self.embedding = Embedding()
@@ -48,7 +48,9 @@ class KnowBase:
 
     def populate_from_data(self, data_dir=None):
         if data_dir is None:
-            data_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(__file__))), 'data')
+            parent_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+            data_dir = os.path.join(parent_dir, 'data')
+            print(f"📁 Diretório de dados escolhido: {data_dir}")
         if not os.path.exists(data_dir):
             print(f"⚠️ Pasta de dados não encontrada: {data_dir}")
             return
