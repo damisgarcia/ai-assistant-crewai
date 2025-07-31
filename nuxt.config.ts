@@ -4,7 +4,12 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineNuxtConfig({
   compatibilityDate: "2025-07-15",
   devtools: { enabled: true },
-  modules: ["@nuxt/eslint", "@nuxt/ui", "@nuxtjs/mdc"],
+  modules: [
+    "@nuxt/eslint",
+    "@nuxt/ui",
+    "@nuxtjs/mdc",
+    "@pinia/nuxt",
+  ],
   ui: {
     colorMode: false, // Disable color mode switcher
   },

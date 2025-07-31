@@ -18,7 +18,16 @@ export default () => {
     return $fetch<any>("conversation/", options);
   }
 
+  function destroy(id: string) {
+    const options = useFetchApiOptions({
+      method: "DELETE",
+    });
+
+    return $fetch<any>(`conversation/${id}/`, options);
+  }
+
   return {
+    destroy,
     fetchOne,
     fetchAll,
     create,

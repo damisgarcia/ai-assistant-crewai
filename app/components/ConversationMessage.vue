@@ -1,6 +1,4 @@
 <script lang="ts" setup>
-import { sampleMakdown } from "@/utils/content";
-
 defineProps({
   message: {
     type: Object as () => any,
@@ -11,12 +9,14 @@ defineProps({
 
 <template>
   <div class="w-full max-w-2xl mx-auto">
-    <MDC
-      v-if="message.sender_type === 'ai-assistant'"
-      :value="sampleMakdown"
-      tag="article"
-      class="prose dark:prose-invert lg:prose-xl"
-    />
+    <div v-if="message.sender_type == 'ai_agent'" class="flex flex-col gap-2">
+      <MDC
+        tag="article"
+        :value="message.content"
+        class="prose prose-lg dark:prose-invert"
+      />
+      <time>{{ message.created_at }}</time>
+    </div>
     <div v-else class="flex flex-col gap-2">
       <div>
         {{ message.content }}

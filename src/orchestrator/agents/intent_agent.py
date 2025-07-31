@@ -14,5 +14,5 @@ class IntentAgent(Agent):
         """
         backstory = "Você é um agente que classifica a intenção com base na pergunta do usuário."
         super().__init__(name=name, role=role, goal=goal, backstory=backstory, llm=llm)
-        self.verbose = True
+        self.verbose = False
         self.tools = tools if tools is not None else []

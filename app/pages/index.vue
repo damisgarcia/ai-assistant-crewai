@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 const { create, fetchAll } = useConversation();
+const { setPendingMessage } = useMessageStore();
 
 const { data: conversations, refresh } = await useAsyncData(
   "conversations",
@@ -11,8 +12,18 @@ const { data: conversations, refresh } = await useAsyncData(
 const conversationAsk = ref("");
 
 async function onAsk(content: string) {
-  await create({ title: content });
-  refresh();
+  const result = await create({ title: content });
+  await refresh();
+
+  // definindo a mensagem pendente
+  // para que o Trend possa enviar quando estiver conectado
+  setPendingMessage(content);
+
+  nextTick(() => {
+    if (result) {
+      navigateTo({ name: "conversations-id", params: { id: result.id } });
+    }
+  });
 }
 </script>
 
@@ -23,6 +34,7 @@ async function onAsk(content: string) {
         <conversation-list
           v-if="conversations"
           :conversations="conversations"
+          @destroy="refresh"
         />
         <template #fallback>
           <div class="text-sm">Carregando...</div>

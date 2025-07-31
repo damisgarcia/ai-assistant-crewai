@@ -4,10 +4,22 @@ const ask = defineModel({
   type: String,
 });
 
+const props = defineProps<{
+  typing?: boolean;
+}>();
+
 const input = useTemplateRef("conversation-input");
 const emit = defineEmits(["submit"]);
 
+const sendIcon = computed(() => {
+  return props.typing ? "zondicons:loading" : "zondicons:send";
+});
+
 function handleAsk() {
+  if (props.typing) {
+    return;
+  }
+
   if (ask.value.trim()) {
     emit("submit", ask.value);
 
@@ -42,9 +54,11 @@ function handleAsk() {
         :autoresize="true"
         :autofocus="true"
         :rows="5"
+        :disabled="props.typing"
         @keyup.prevent.enter="handleAsk"
       />
       <UButton
+        v-if="!props.typing"
         icon="zondicons:send"
         size="md"
         color="primary"

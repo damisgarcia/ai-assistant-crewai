@@ -7,8 +7,19 @@ function scrollToBottom() {
   }
 }
 
+function scrollToMessage() {
+  if (container.value) {
+    container.value.scrollTop = container.value.scrollTop + 100;
+  }
+}
+
 onMounted(() => {
   scrollToBottom();
+});
+
+defineExpose({
+  scrollToBottom,
+  scrollToMessage,
 });
 </script>
 

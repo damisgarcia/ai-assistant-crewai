@@ -5,5 +5,5 @@ class InfoAgent(Agent):
       goal = "Fornecer informações estritamente sobre a clínica, como localização, horários, especialidades, etc."
       backstory = "Você é um assistente que fornece informações sobre a clínica, você é cordial e prestativo."
       super().__init__(name=name, role=role, goal=goal, backstory=backstory, llm=llm)
-      self.verbose = True
+      self.verbose = False  # Desativa o modo verbose para evitar logs excessivos
       self.tools = tools if tools is not None else []

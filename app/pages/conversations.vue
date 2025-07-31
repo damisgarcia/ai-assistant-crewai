@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 const { fetchAll } = useConversation();
 
-const { data: conversations } = await useAsyncData(
+const { data: conversations, refresh } = await useAsyncData(
   "conversations",
   async () => {
     return await fetchAll();
@@ -16,6 +16,7 @@ const { data: conversations } = await useAsyncData(
         <conversation-list
           v-if="conversations"
           :conversations="conversations"
+          @destroy="refresh"
         />
         <template #fallback>
           <div class="text-sm">Carregando...</div>
