@@ -1,7 +1,6 @@
 import os
 import glob
 import chromadb
-from .embedding import Embedding
 
 import threading
 
@@ -24,7 +23,6 @@ class KnowBase:
             persist_dir = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), 'chroma_db')
         self.persist_dir = persist_dir
         self.collection_name = collection_name
-        self.embedding = Embedding()
         self.client = chromadb.PersistentClient(path=self.persist_dir)
         self.collection = self._get_or_create_collection()
         self._initialized = True
@@ -70,27 +68,21 @@ class KnowBase:
                 print(f"❌ Erro ao ler {file_path}: {e}")
         if documents:
             print(f"🔄 Gerando embeddings para {len(documents)} documentos...")
-            embeddings = self.embedding.embed(documents)
-            if embeddings:
-                self.collection.add(
-                    embeddings=embeddings,
-                    documents=documents,
-                    metadatas=metadatas,
-                    ids=ids
-                )
-                print(f"✅ {len(documents)} documentos adicionados à coleção!")
-            else:
-                print("❌ Falha ao gerar embeddings para os documentos.")
+
+            self.collection.add(
+                documents=documents,
+                metadatas=metadatas,
+                ids=ids
+            )
+
+            print(f"✅ {len(documents)} documentos adicionados à coleção!")
 
     def search(self, query, n_results=3):
         if self.collection is None:
             return {"documents": [], "metadatas": [], "error": "Base de conhecimento não inicializada"}
-        query_embeddings = self.embedding.embed([query])
-        if not query_embeddings:
-            return {"documents": [], "metadatas": [], "error": "Falha ao gerar embedding da query"}
         try:
             results = self.collection.query(
-                query_embeddings=query_embeddings,
+                query_texts=[query],
                 n_results=n_results
             )
             return {

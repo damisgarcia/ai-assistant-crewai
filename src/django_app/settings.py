@@ -42,6 +42,7 @@ ASGI_APPLICATION = "django_app.asgi.application"
 # Application definition
 
 INSTALLED_APPS = [
+    'django_app.apps.MyAppConfig',
     'daphne',
     'django.contrib.admin',
     'django.contrib.auth',

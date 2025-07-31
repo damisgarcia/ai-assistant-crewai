@@ -17,13 +17,10 @@ llm = LLM(
 rag_tool = RagTool()
 
 # Agente com a ferramenta
-tagente = IntentAgent(
-    llm=llm,
-    tools=[rag_tool]
-)
+intent_agent = IntentAgent(llm=llm)
 
-greeting_assistant = GreetingAgent(llm=llm)
-info_assistant = InfoAgent(llm=llm)
+greeting_assistant = GreetingAgent(llm=llm, tools=[rag_tool])
+info_assistant = InfoAgent(llm=llm, tools=[rag_tool])
 fail_assistant = FailAgent(llm=llm)
 
 def test_intent_agent():
@@ -50,15 +47,15 @@ def test_intent_agent():
         task_classification = Task(
             description=query,
             expected_output="Intenção da conversa.",
-            agent=tagente
+            agent=intent_agent
         )
 
         intent = task_classification.execute_sync()
 
         if intent.raw == "greeting":
-            task = GreetingTask(query=query, agent=greeting_assistant)
+            task = GreetingTask(query=query, agent=greeting_assistant, context=[task_classification])
         elif intent.raw == "info":
-            task = GeneralInfoTask(query=query, agent=info_assistant)
+            task = GeneralInfoTask(query=query, agent=info_assistant, context=[task_classification])
         else:
             task = UnknownTask(query=query, agent=fail_assistant)
 

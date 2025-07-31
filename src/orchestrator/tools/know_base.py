@@ -27,7 +27,7 @@ class RagTool(BaseTool):
         """Execute a busca na base de conhecimento"""
         try:
             knowbase = KnowBase()
-            search_results = knowbase.search(query=query)
+            search_results = knowbase.search(query=query, n_results=3)
 
             # Verifica se houve erro
             if "error" in search_results:
