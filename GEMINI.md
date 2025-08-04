@@ -29,6 +29,7 @@ Você trabalhar com o seguinte fluxo:
 
 - As informações sobre a clínica está em data/src **não utilizarei PDF ou Doc apenas .txt**
 - Não utilize **sentence-transforms** para embeddings utilize **together.ai**
+- Sempre utilize o comando ./bin/manage para executar ações no Django
 
 # Django
 

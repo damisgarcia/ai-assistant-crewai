@@ -1,2 +1,2 @@
-frontend: bun run dev
+frontend: bun run dev -p 3000
 django: ./bin/server

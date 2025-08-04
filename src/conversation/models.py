@@ -11,8 +11,10 @@ class Conversation(models.Model):
     STATUS_CHOICES = [
         ("open", "Open"),
         ("closed", "Closed"),
+        ("registering_contact", "Registering Contact"),
         ("expired", "Expired"),
     ]
+
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="open")
     title = models.CharField(max_length=255, blank=True, null=True)
