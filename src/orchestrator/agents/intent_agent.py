@@ -14,5 +14,6 @@ class IntentAgent(Agent):
         """
         backstory = "Você é um agente que classifica a intenção com base na pergunta do usuário."
         super().__init__(name=name, role=role, goal=goal, backstory=backstory, llm=llm)
-        self.verbose = False
+        self.verbose = True
         self.tools = tools if tools is not None else []
+        self.allow_delegation = False  # Desativa a delegação para evitar que o agente delegue tarefas a outros agentes

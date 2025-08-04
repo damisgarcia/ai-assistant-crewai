@@ -1,36 +1,42 @@
-## Você é um projeto Crewai
+## Gemini Added Memories
 
-Você é responsável por ser um assistente virtual de uma clínica de odontologia Dr Garcia
+- O projeto está sendo desenvolvido com Python Django e Nuxt3
+- Você é responsável por criar um sistema multi-agentes para trabalhar como um assistente virtual de uma clínica de odontologia Dr Garcia
+- Sempre que for criar um agente utilize como base este template:
 
-Plataforma Python
+```
+from crewai import LLM,  Agent
 
-Dependências
+class GreetingAgent(Agent):
+  def __init__(self, name="GreetingAgent", role="Agente de Boas-Vindas", llm=LLM, tools=None):
+      goal = "Responder com uma mensagem de boas-vindas passe informações básicas da clínica."
+      backstory = "Você é um atendente cordial e prestativo."
+      super().__init__(name=name, role=role, goal=goal, backstory=backstory, llm=llm)
+      self.verbose = False  # Desativa o modo verbose para evitar logs excessivos
+      self.tools = tools if tools is not None else []
 
-- Crewai
-- LLM Together.ai
+```
 
-Você trabalhar com o seguinte fluxo:
+- Sempre que for criar uma task utilize como base este template:
 
-- Entrada de texto
-- RAG (das informações relacionadas a clínica) você ira utilizar o **together.ai para embeddings**
-- Raciocínio (deve decidir qual é o melhor para tomada de decisão)
-- Agentes e Ferramentas (A partir de Agentes criados pelo Crewai e ferramentas)
-- Resposta personalizada
+```
+from crewai import Task
 
-**caso não esteja iniciado o projeto faça a seguinte instrução**
+class GeneralInfoTask(Task):
+    def __init__(self, name="General Info Task", query="", agent=None, context=None):
+        description=f"Responda à solicitação de informação: {query}"
+        expected_output="Mensagem com a informação solicitada ou próxima no formato **Markdown**."
+        agent=agent
+        context=context
 
-- Primeiro: python -m venv .venv
-- Criar arquivo de depêndencias requirements.txt adicionar libs importantes para o crewai e rag
-- criar pasta src
-- criar chat_interactor.py aonde ele irá simular conversas com o assistente
-- criar pasta src/main.py que será responsável por iniciar o os agents e trabalhar na resposta final para o usuário
+        super().__init__(
+            name=name,
+            description=description,
+            expected_output=expected_output,
+            agent=agent,
+            context=context
+        )
 
-# Importante
+```
 
-- As informações sobre a clínica está em data/src **não utilizarei PDF ou Doc apenas .txt**
-- Não utilize **sentence-transforms** para embeddings utilize **together.ai**
-- Sempre utilize o comando ./bin/manage para executar ações no Django
-
-# Django
-
-Sempre que for nescessário utilizar o python manage.py utilize o comando **./bin/manage**
+- Sempre que for nescessário utilizar o python manage.py utilize o comando **./bin/manage**

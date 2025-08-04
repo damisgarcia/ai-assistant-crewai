@@ -5,16 +5,19 @@ from django.utils import timezone
 from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
 
-# Create your models here.
+CONVERSATION_STATUS_OPEN = "open"
+CONVERSATION_STATUS_CLOSED = "closed"
+CONVERSATION_STATUS_REGISTERING_CONTACT = "registering_contact"
+CONVERSATION_STATUS_EXPIRED = "expired"
 
+# Create your models here.
 class Conversation(models.Model):
     STATUS_CHOICES = [
-        ("open", "Open"),
-        ("closed", "Closed"),
-        ("registering_contact", "Registering Contact"),
-        ("expired", "Expired"),
+        (CONVERSATION_STATUS_OPEN, "Open"),
+        (CONVERSATION_STATUS_CLOSED, "Closed"),
+        (CONVERSATION_STATUS_REGISTERING_CONTACT, "Registering Contact"),
+        (CONVERSATION_STATUS_EXPIRED, "Expired"),
     ]
-
     user = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.SET_NULL, null=True, blank=True)
     status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="open")
     title = models.CharField(max_length=255, blank=True, null=True)
